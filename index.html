@@ -4,62 +4,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI研修 - Organic Intelligence & Trust</title>
+    <title>Llabo | AI Skill Training for Business</title>
 
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap"
         rel="stylesheet">
 
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Design System Configuration -->
     <style>
-        /* --- Variables & Reset --- */
         :root {
-            --bg-color: #fcfbf9;
+            --bg-color: #f8fbff;
             --text-main: #1a1a1a;
             --text-sub: #666666;
-            --accent-pink: #ff9a9e;
-            --accent-peach: #fad0c4;
-            --accent-lavender: #a18cd1;
-            --glass-bg: rgba(255, 255, 255, 0.65);
-            --glass-border: rgba(255, 255, 255, 0.4);
-            --font-jp: 'Zen Kaku Gothic New', sans-serif;
-            --font-en: 'Manrope', sans-serif;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+            --accent-blob-1: #a7dbff;
+            --accent-blob-2: #cbf3f0;
+            --accent-blob-3: #d4e0ff;
+            --card-bg: rgba(255, 255, 255, 0.7);
         }
 
         body {
-            font-family: var(--font-jp);
-            color: var(--text-main);
+            font-family: 'Zen Kaku Gothic New', sans-serif;
             background-color: var(--bg-color);
-            line-height: 1.8;
+            color: var(--text-main);
             overflow-x: hidden;
-            font-weight: 400;
         }
 
-        /* --- Typography Utilities --- */
         h1,
         h2,
-        h3 {
-            font-feature-settings: "palt";
-            letter-spacing: 0.05em;
-        }
-
+        h3,
         .en-font {
-            font-family: var(--font-en);
+            font-family: 'Manrope', 'Zen Kaku Gothic New', sans-serif;
         }
 
-        /* --- Background Blobs Animation --- */
-        .background-blobs {
+        /* 3.1 Background Blobs */
+        .blob-container {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100vw;
+            width: 100%;
             height: 100vh;
             z-index: -1;
             overflow: hidden;
@@ -71,24 +62,24 @@
             border-radius: 50%;
             filter: blur(80px);
             opacity: 0.6;
-            animation: float 20s infinite ease-in-out alternate;
+            animation: float 25s infinite ease-in-out alternate;
         }
 
         .blob-1 {
             top: -10%;
             left: -10%;
-            width: 60vw;
-            height: 60vw;
-            background: var(--accent-peach);
+            width: 50vw;
+            height: 50vw;
+            background: var(--accent-blob-1);
             animation-delay: 0s;
         }
 
         .blob-2 {
             bottom: -10%;
             right: -10%;
-            width: 50vw;
-            height: 50vw;
-            background: var(--accent-lavender);
+            width: 60vw;
+            height: 60vw;
+            background: var(--accent-blob-3);
             animation-delay: -5s;
         }
 
@@ -97,7 +88,7 @@
             left: 40%;
             width: 40vw;
             height: 40vw;
-            background: var(--accent-pink);
+            background: var(--accent-blob-2);
             animation-delay: -10s;
         }
 
@@ -106,489 +97,579 @@
                 transform: translate(0, 0) scale(1);
             }
 
-            50% {
-                transform: translate(30px, 50px) scale(1.1);
+            33% {
+                transform: translate(30px, -50px) scale(1.1);
+            }
+
+            66% {
+                transform: translate(-20px, 20px) scale(0.9);
             }
 
             100% {
-                transform: translate(-20px, -30px) scale(0.9);
+                transform: translate(0, 0) scale(1);
             }
         }
 
-        /* --- Common Components --- */
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-
+        /* 3.2 Glassmorphism Card */
         .glass-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid var(--glass-border);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.03);
-            border-radius: 24px;
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
-        }
-
-        .glass-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.06);
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 16px 32px;
-            background: var(--text-main);
-            color: #fff;
-            font-weight: 700;
-            border-radius: 50px;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
-        }
-
-        .btn:hover {
-            background: #333;
-            transform: scale(1.02);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
-        }
-
-        .section-title {
-            font-size: clamp(1.5rem, 3vw, 2rem);
-            text-align: center;
-            margin-bottom: 60px;
-            font-weight: 700;
-        }
-
-        img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        /* --- Header --- */
-        header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 20px 0;
-            z-index: 100;
-            transition: background 0.3s;
-        }
-
-        /* Sticky background effect */
-        header.scrolled .header-inner {
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
-        }
-
-        .header-inner {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 16px 32px;
-            border-radius: 100px;
-            transition: all 0.3s ease;
-            /* 初期状態は背景なし、スクロールでカード化 */
-        }
-
-        .logo {
-            font-family: var(--font-en);
-            font-weight: 800;
-            font-size: 1.5rem;
-            color: var(--text-main);
-            text-decoration: none;
-            position: relative;
-        }
-
-        .logo span {
-            color: var(--accent-pink);
-        }
-
-        .nav-links {
-            display: none;
-            /* Mobile hidden */
-        }
-
-        @media (min-width: 768px) {
-            .nav-links {
-                display: flex;
-                gap: 40px;
-                font-weight: 500;
-                color: var(--text-main);
-            }
-
-            .nav-item {
-                text-decoration: none;
-                color: var(--text-main);
-                position: relative;
-            }
-
-            .nav-item::after {
-                content: '';
-                position: absolute;
-                bottom: -4px;
-                left: 0;
-                width: 0;
-                height: 2px;
-                background: var(--text-main);
-                transition: width 0.3s;
-            }
-
-            .nav-item:hover::after {
-                width: 100%;
-            }
-        }
-
-        .cta-btn {
-            font-size: 0.9rem;
-            padding: 12px 24px;
-            background: transparent;
-            border: 1px solid var(--text-main);
-            color: var(--text-main);
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 700;
-            transition: all 0.3s;
-        }
-
-        .cta-btn:hover {
-            background: var(--text-main);
-            color: #fff;
-        }
-
-        /* --- Hero Section --- */
-        .hero {
-            padding: 180px 0 100px;
-            min-height: 90vh;
-            display: flex;
-            align-items: center;
-        }
-
-        .hero-content {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 60px;
-            align-items: center;
-        }
-
-        @media (min-width: 900px) {
-            .hero-content {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
-        .hero-text h1 {
-            font-size: clamp(2rem, 4vw, 3.2rem);
-            font-weight: 700;
-            line-height: 1.4;
-            margin-bottom: 24px;
-        }
-
-        .hero-sub {
-            font-size: 1.1rem;
-            color: var(--text-sub);
-            font-weight: 500;
-            margin-bottom: 40px;
-            display: block;
-            letter-spacing: 0.1em;
-        }
-
-        .hero-image {
-            position: relative;
-        }
-
-        .hero-image img {
+            background: var(--card-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.9);
             border-radius: 30px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 30px rgba(167, 219, 255, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        /* --- Problems Section --- */
-        .problems {
-            padding: 120px 0;
-        }
-
-        .problems-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 32px;
-        }
-
-        .problem-card {
-            padding: 60px 30px;
-            text-align: center;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .problem-card p {
-            font-size: 1.2rem;
-            font-weight: 700;
-            line-height: 1.6;
-        }
-
-        .problem-card p span {
-            font-family: var(--font-en);
-            font-weight: 800;
-            font-size: 1.4rem;
-        }
-
-        /* --- Features Section --- */
-        .features {
-            padding: 120px 0;
-        }
-
-        .feature-row {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 60px;
-            margin-bottom: 120px;
-            align-items: center;
-        }
-
-        @media (min-width: 900px) {
-            .feature-row {
-                grid-template-columns: 1fr 1fr;
-                gap: 80px;
-            }
-
-            /* Zig-zag layout */
-            .feature-row:nth-child(even) .feature-text {
-                order: 2;
-            }
-
-            .feature-row:nth-child(even) .feature-image {
-                order: 1;
-            }
-        }
-
-        .feature-num {
-            font-family: var(--font-en);
-            font-size: 3.5rem;
-            font-weight: 800;
-            color: var(--glass-border);
-            /* Subtle transparent effect */
-            -webkit-text-stroke: 1px var(--text-main);
-            line-height: 1;
-            margin-bottom: 16px;
-            display: block;
-        }
-
-        .feature-text h3 {
-            font-size: 1.8rem;
-            margin-bottom: 24px;
-            font-weight: 700;
-        }
-
-        .feature-desc {
-            color: var(--text-sub);
-            font-size: 1rem;
-        }
-
-        .feature-image img {
-            border-radius: 24px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
-        }
-
-        /* --- Plans Section --- */
-        .plans {
-            padding: 120px 0 180px;
-        }
-
-        .plans-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 32px;
-        }
-
-        .plan-card {
-            padding: 50px 30px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .plan-name {
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            display: block;
-        }
-
-        .plan-price {
-            font-family: var(--font-en);
-            font-size: 2rem;
-            font-weight: 800;
-            color: var(--text-main);
-        }
-
-        .plan-unit {
-            font-size: 0.9rem;
-            font-weight: 500;
-            color: var(--text-sub);
-        }
-
-        /* --- Scroll Animation --- */
-        .reveal {
+        /* 4.1 Scroll Interaction: Fade In Up */
+        .fade-in-section {
             opacity: 0;
-            transform: translateY(40px);
-            transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
+            transform: translateY(30px);
+            transition: opacity 1.0s cubic-bezier(0.16, 1, 0.3, 1), transform 1.0s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .reveal.active {
+        .fade-in-section.is-visible {
             opacity: 1;
             transform: translateY(0);
         }
 
-        /* Footer - Simple */
-        footer {
-            text-align: center;
-            padding: 40px;
-            font-size: 0.8rem;
-            color: var(--text-sub);
-            background: rgba(255, 255, 255, 0.3);
+        /* Custom Utilities */
+        .text-gradient {
+            background: linear-gradient(135deg, #1a1a1a 0%, #4a5568 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Stronger gradient for specific emphasis */
+        .text-gradient-accent {
+            background: linear-gradient(135deg, #2563eb 0%, #9333ea 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-link {
+            position: relative;
+            color: var(--text-main);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: var(--accent-blob-1);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* CTA Button Style (New) */
+        .btn-cta {
+            background: linear-gradient(135deg, #2563eb 0%, #4f46e5 100%);
+            /* Blue-600 to Indigo-600 */
+            color: white;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+            /* Colored shadow */
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-cta:hover {
+            background: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
+            /* Lighter on hover */
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.5);
+            /* Stronger glow */
+        }
+
+        /* Accordion Styles */
+        .accordion-content {
+            transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+        }
+
+        .accordion-content.open {
+            max-height: 500px;
+            /* large enough value */
+            opacity: 1;
+        }
+
+        .accordion-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .accordion-btn[aria-expanded="true"] .accordion-icon {
+            transform: rotate(180deg);
+        }
+
+        /* Plan Specific Styles */
+        .plan-price {
+            color: #1a1a1a;
+            letter-spacing: -0.02em;
+        }
+
+        .plan-item {
+            color: #333;
+            font-weight: 500;
+        }
+
+        /* Mobile Menu Animation */
+        #mobile-menu {
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        #mobile-menu.hidden-menu {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        #mobile-menu.visible-menu {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
         }
     </style>
 </head>
 
-<body>
+<body class="antialiased">
 
-    <div class="background-blobs">
+    <!-- Background Blobs -->
+    <div class="blob-container">
         <div class="blob blob-1"></div>
         <div class="blob blob-2"></div>
         <div class="blob blob-3"></div>
     </div>
 
-    <header id="header">
-        <div class="container">
-            <div class="header-inner glass-card" style="border-radius: 100px; padding: 12px 32px;">
-                <a href="#" class="logo">rogo<span>.</span></a>
-                <nav class="nav-links">
-                    <a href="#" class="nav-item">サービスの特徴</a>
-                    <a href="#" class="nav-item">研修プラン</a>
-                    <a href="#" class="nav-item">導入事例</a>
-                </nav>
-                <a href="#" class="cta-btn">資料請求</a>
+    <!-- Header -->
+    <header class="fixed w-full top-0 z-50" id="header">
+        <div id="header-card"
+            class="glass-card !rounded-none !border-t-0 !border-x-0 bg-white/30 px-6 py-4 transition-all duration-300">
+            <div class="max-w-[95%] mx-auto flex justify-between items-center">
+                <!-- Logo -->
+                <a href="#" class="flex items-center gap-2 group">
+                    <span class="text-xl font-bold tracking-tighter font-[Manrope] text-gray-800">生成AI研修 llabo</span>
+                </a>
+
+                <!-- Right Side Group -->
+                <div class="flex items-center gap-8">
+                    <!-- Desktop Nav -->
+                    <nav class="hidden md:flex items-center gap-8 font-bold text-lg text-gray-600">
+                        <a href="#features" class="nav-link">特徴</a>
+                        <a href="#plans" class="nav-link">プラン</a>
+                        <a href="#faq" class="nav-link">よくある質問</a>
+                    </nav>
+
+                    <!-- CTA (Updated Style) -->
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSey76R4gK829sYtxPBTs0NOX0EU5gp5u-cqteT0MH_bNKVNkw/viewform?usp=dialog"
+                        target="_blank"
+                        class="btn-cta hidden md:inline-flex items-center justify-center px-8 py-3 text-base font-bold rounded-full">
+                        資料をもらう
+                    </a>
+
+                    <!-- Mobile Menu Button -->
+                    <button id="menu-btn" class="md:hidden p-2 text-gray-700 z-50 relative">
+                        <i data-lucide="menu" id="menu-icon"></i>
+                    </button>
+                </div>
             </div>
         </div>
     </header>
 
-    <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-text reveal">
-                    <span class="hero-sub">~ AIコンサルタント伴走 ~</span>
-                    <h1>現場の生産性を<br>劇的に高める生成AI研修</h1>
-                    <p style="color: var(--text-sub); margin-bottom: 32px;">
-                        ただの学習ではありません。<br>実務に直結するスキルを、プロフェッショナルの伴走と共に。
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu"
+        class="hidden-menu fixed inset-0 z-40 bg-white/95 backdrop-blur-md flex flex-col items-center justify-center space-y-8">
+        <a href="#features" class="mobile-link text-2xl font-bold text-gray-800">特徴</a>
+        <a href="#plans" class="mobile-link text-2xl font-bold text-gray-800">プラン</a>
+        <a href="#faq" class="mobile-link text-2xl font-bold text-gray-800">よくある質問</a>
+        <!-- CTA (Updated Style) -->
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSey76R4gK829sYtxPBTs0NOX0EU5gp5u-cqteT0MH_bNKVNkw/viewform?usp=dialog"
+            target="_blank"
+            class="mobile-link btn-cta inline-flex items-center justify-center px-10 py-4 text-lg font-bold rounded-full">
+            資料をもらう
+        </a>
+    </div>
+
+    <main class="pt-32 pb-12 px-4 md:px-8 overflow-hidden">
+
+        <!-- Hero Section -->
+        <section class="max-w-7xl mx-auto mb-32 fade-in-section">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-8">
+                    <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight text-gray-800">
+                        ChatGPTやGemini等の<br>
+                        <span class="text-gradient-accent text-4xl md:text-5xl lg:text-6xl">AIスキル</span>を実業務に。
+                    </h1>
+                    <p class="text-lg font-bold leading-relaxed text-gradient">
+                        AIサービス運営者が提供する、<br class="md:hidden">実戦特化型のコーチ伴走型AI研修。
                     </p>
-                    <a href="#" class="btn">お問い合わせ・相談</a>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <!-- CTA (Updated Style) -->
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSey76R4gK829sYtxPBTs0NOX0EU5gp5u-cqteT0MH_bNKVNkw/viewform?usp=dialog"
+                            target="_blank"
+                            class="btn-cta inline-flex items-center justify-center px-10 py-4 text-base font-bold rounded-full">
+                            資料をもらう
+                            <i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i>
+                        </a>
+                    </div>
                 </div>
-                <div class="hero-image reveal" style="transition-delay: 0.2s;">
-                    <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=800&q=80"
-                        alt="チームで学習している様子">
+                <div class="relative">
+                    <!-- Decorative Shape -->
+                    <div
+                        class="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] border border-blue-200 rounded-full opacity-50 animate-pulse">
+                    </div>
+
+                    <!-- Image Container -->
+                    <div class="glass-card p-3 overflow-hidden group">
+                        <div class="relative aspect-[4/3] overflow-hidden rounded-2xl bg-gray-100">
+                            <img src="top.png" alt="Team learning AI together in a bright office"
+                                class="object-cover w-full h-full transition-transform duration-700 group-hover:scale-105 saturate-[0.85]">
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="problems">
-        <div class="container">
-            <h2 class="section-title reveal">こんな課題ありませんか？</h2>
-            <div class="problems-grid">
-                <div class="glass-card problem-card reveal" style="transition-delay: 0.1s;">
-                    <p><span>AI</span>が全然<br>分からない</p>
-                </div>
-                <div class="glass-card problem-card reveal" style="transition-delay: 0.2s;">
-                    <p>業務でもっと<br>活かしたい</p>
-                </div>
-                <div class="glass-card problem-card reveal" style="transition-delay: 0.3s;">
-                    <p>言語生成以外<br>も使いたい</p>
-                </div>
+        <!-- Problems Section -->
+        <section class="max-w-6xl mx-auto mb-32 fade-in-section">
+            <div class="text-center mb-16">
+                <h2 class="text-2xl md:text-3xl font-bold mb-4">企業でこんな課題ありませんか？</h2>
+                <div class="w-12 h-1 bg-blue-300 mx-auto rounded-full"></div>
             </div>
-        </div>
-    </section>
 
-    <section class="features">
-        <div class="container">
-            <h2 class="section-title reveal">本研修の特徴</h2>
-
-            <div class="feature-row">
-                <div class="feature-text reveal">
-                    <span class="feature-num">01</span>
-                    <h3>コンサルタントが伴走</h3>
-                    <p class="feature-desc">
-                        単なる動画視聴や講義形式の一方的な学習ではなく、経験豊富なAIコンサルタントが現場に伴走。貴社の課題に合わせてカリキュラムを調整し、実務での活用定着までを徹底的にサポートします。分からない点はその場ですぐに解決可能です。
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Problem 1 -->
+                <div class="glass-card p-6 text-center flex flex-col items-center h-full max-w-sm mx-auto w-full">
+                    <div class="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center mb-6 text-blue-400">
+                        <i data-lucide="layers" class="w-8 h-8"></i>
+                    </div>
+                    <p class="text-lg font-bold leading-relaxed">
+                        色々なAIツールがあって、<br>よくわからない
                     </p>
                 </div>
-                <div class="feature-image reveal" style="transition-delay: 0.2s;">
-                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80"
-                        alt="コンサルタントとのミーティング">
-                </div>
-            </div>
 
-            <div class="feature-row">
-                <div class="feature-text reveal">
-                    <span class="feature-num">02</span>
-                    <h3>生成AIのプロが提供</h3>
-                    <p class="feature-desc">
-                        最新の技術トレンドを常にキャッチアップしている生成AIの専門家集団が監修。ChatGPTだけでなく、画像生成やデータ分析など、ビジネスシーンで即戦力となる最先端のノウハウを、初心者にも分かりやすく噛み砕いて提供します。
+                <!-- Problem 2 -->
+                <div class="glass-card p-6 text-center flex flex-col items-center h-full max-w-sm mx-auto w-full">
+                    <div class="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center mb-6 text-blue-400">
+                        <i data-lucide="users" class="w-8 h-8"></i>
+                    </div>
+                    <p class="text-lg font-bold leading-relaxed">
+                        社員毎に使い方<br>がバラバラ
                     </p>
                 </div>
-                <div class="feature-image reveal" style="transition-delay: 0.2s;">
-                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80"
-                        alt="プロフェッショナルなチーム">
+
+                <!-- Problem 3 -->
+                <div class="glass-card p-6 text-center flex flex-col items-center h-full max-w-sm mx-auto w-full">
+                    <div class="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center mb-6 text-blue-400">
+                        <i data-lucide="message-circle-question" class="w-8 h-8"></i>
+                    </div>
+                    <p class="text-lg font-bold leading-relaxed">
+                        期待する答えが<br>返ってこない
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="max-w-7xl mx-auto mb-32 scroll-mt-32">
+            <div class="text-center mb-12 fade-in-section">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">本研修の特徴</h2>
+                <p class="text-gray-500 font-manrope">FEATURES</p>
+            </div>
+
+            <!-- Feature 01 -->
+            <div class="flex flex-col md:flex-row items-center gap-12 mb-24 fade-in-section">
+                <div class="w-full md:w-1/2 space-y-6">
+                    <h3 class="text-2xl md:text-3xl font-bold leading-snug">
+                        <span class="text-blue-500 font-manrope text-4xl mr-2">01</span>
+                        「明日から使える」成果物を作成
+                    </h3>
+                    <p class="text-gray-600 leading-loose">
+                        動画や講義で学ぶだけではなく、実業務における課題に合わせて、<br class="hidden md:inline">
+                        解決策を一緒に作るコーチ伴走型研修。<br class="hidden md:inline">
+                        現場ですぐに活用できるプロンプトやワークフローを持ち帰ることができます。
+                    </p>
+                </div>
+                <div class="w-full md:w-1/2">
+                    <div class="glass-card p-2">
+                        <div class="aspect-video bg-gray-100 rounded-2xl overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1531403009284-440f080d1e12?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+                                alt="Practical Output" class="object-cover w-full h-full saturate-[0.8]">
+                        </div>
+                    </div>
                 </div>
             </div>
 
-        </div>
-    </section>
-
-    <section class="plans">
-        <div class="container">
-            <h2 class="section-title reveal">3つのプラン</h2>
-            <div class="plans-grid">
-                <div class="glass-card plan-card reveal" style="transition-delay: 0.1s;">
-                    <span class="plan-name">集合型</span>
-                    <div class="plan-price">300,000<span class="plan-unit"> / 1回</span></div>
+            <!-- Feature 02 -->
+            <div class="flex flex-col md:flex-row-reverse items-center gap-12 fade-in-section">
+                <div class="w-full md:w-1/2 space-y-6">
+                    <h3 class="text-2xl md:text-3xl font-bold leading-snug">
+                        <span class="text-blue-500 font-manrope text-4xl mr-2">02</span>
+                        AIサービス運営者が提供
+                    </h3>
+                    <p class="text-gray-600 leading-loose">
+                        当社は単なる研修会社ではありません。<br class="hidden md:inline">
+                        生成AIサービスやソリューションを自社で運営しているからこその、<br class="hidden md:inline">
+                        生きたナレッジを提供します。
+                    </p>
+                    <div class="bg-white/50 p-4 rounded-xl border border-blue-100 inline-block">
+                        <p class="text-sm text-gray-500 mb-1">運営サービス例</p>
+                        <a href="https://ehon-ni-oideyo.jp/" target="_blank" rel="noopener noreferrer"
+                            class="flex items-center gap-2 text-blue-600 font-bold hover:text-blue-800 transition-colors group">
+                            「えほんにおいでよ」
+                            <i data-lucide="external-link"
+                                class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                        </a>
+                    </div>
                 </div>
-                <div class="glass-card plan-card reveal" style="transition-delay: 0.2s;">
-                    <span class="plan-name">伴走型</span>
-                    <div class="plan-price">200,000<span class="plan-unit"> / 1人</span></div>
-                </div>
-                <div class="glass-card plan-card reveal" style="transition-delay: 0.3s;">
-                    <span class="plan-name">動画のみ</span>
-                    <div class="plan-price">100,000<span class="plan-unit"> / 1人</span></div>
+                <div class="w-full md:w-1/2">
+                    <div class="glass-card p-2">
+                        <div class="aspect-video bg-gray-100 rounded-2xl overflow-hidden relative">
+                            <img src="2.png" alt="Experts Team" class="object-cover w-full h-full saturate-[0.8]">
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <footer>
-        <p>&copy; 2024 rogo Inc. All Rights Reserved.</p>
+        <!-- Plans Section -->
+        <section id="plans" class="max-w-7xl mx-auto mb-12 fade-in-section scroll-mt-32">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">3つのプラン</h2>
+                <p class="text-gray-500">PLANS</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+                <!-- Plan 1 -->
+                <div class="glass-card p-8 flex flex-col relative">
+                    <h3 class="text-xl font-bold mb-4 text-center text-gray-800">集合型ライトプラン</h3>
+                    <div class="text-center mb-8">
+                        <span class="text-4xl font-extrabold font-manrope plan-price">¥500,000</span>
+                        <span class="text-sm text-gray-600 font-bold">/1回</span>
+                    </div>
+
+                    <div class="border border-blue-200 rounded-lg py-3 text-center mb-6 bg-white/60">
+                        <span class="font-bold text-lg text-gray-900">2時間</span>
+                    </div>
+
+                    <ul class="space-y-4 text-base mb-8 flex-grow plan-item">
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check" class="w-6 h-6 text-blue-500 shrink-0"></i>
+                            <span>何名でも可</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check" class="w-6 h-6 text-blue-500 shrink-0"></i>
+                            <span>1日で完結</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check" class="w-6 h-6 text-blue-500 shrink-0"></i>
+                            <span>基礎を網羅</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Plan 2 (Recommended) -->
+                <div
+                    class="glass-card p-8 flex flex-col relative border-4 border-blue-600 shadow-xl transform md:-translate-y-4 bg-white/80">
+                    <div
+                        class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gray-900 text-white text-sm font-bold px-6 py-1.5 rounded-full tracking-wider shadow-md">
+                        好評
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-center text-gray-900">コーチ伴走プラン</h3>
+                    <div class="text-center mb-8">
+                        <span class="text-4xl font-extrabold font-manrope plan-price">¥200,000</span>
+                        <span class="text-sm text-gray-600 font-bold">/1人</span>
+                    </div>
+
+                    <div class="border border-gray-800 rounded-lg py-3 text-center mb-6 bg-white shadow-sm">
+                        <span class="font-bold text-xl text-gray-900">1時間 × 8回</span>
+                    </div>
+
+                    <ul class="space-y-4 text-base mb-8 flex-grow plan-item">
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check" class="w-6 h-6 text-blue-600 shrink-0"></i>
+                            <span>3名〜可</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check" class="w-6 h-6 text-blue-600 shrink-0"></i>
+                            <span>週1回2ヶ月</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check" class="w-6 h-6 text-blue-600 shrink-0"></i>
+                            <span>ハンズオン型</span>
+                        </li>
+                        <li class="flex items-start gap-3 pl-1">
+                            <span class="text-sm font-bold text-gray-700 bg-blue-50 px-2 py-1 rounded">※
+                                eラーニングも受講可</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Plan 3 -->
+                <div class="glass-card p-8 flex flex-col relative">
+                    <h3 class="text-xl font-bold mb-4 text-center text-gray-800">eラーニングプラン</h3>
+                    <div class="text-center mb-8">
+                        <span class="text-4xl font-extrabold font-manrope plan-price">¥100,000</span>
+                        <span class="text-sm text-gray-600 font-bold">/1人</span>
+                    </div>
+
+                    <div class="border border-blue-200 rounded-lg py-3 text-center mb-6 bg-white/60">
+                        <span class="font-bold text-lg text-gray-900">動画のみ</span>
+                    </div>
+
+                    <ul class="space-y-4 text-base mb-8 flex-grow plan-item">
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check" class="w-6 h-6 text-blue-500 shrink-0"></i>
+                            <span>3名〜可</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check" class="w-6 h-6 text-blue-500 shrink-0"></i>
+                            <span>2ヶ月間見放題</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check" class="w-6 h-6 text-blue-500 shrink-0"></i>
+                            <span>約100コンテンツ</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Grant Section -->
+        <section class="max-w-4xl mx-auto mb-24 fade-in-section">
+            <div class="glass-card py-8 px-8 text-center overflow-hidden relative">
+                <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-200 via-teal-200 to-purple-200">
+                </div>
+                <h2 class="text-2xl md:text-3xl font-bold mb-4 tracking-tight">
+                    最大<span class="text-5xl font-manrope text-blue-600 mx-2">75%</span>助成金活用可能
+                </h2>
+                <p class="text-gray-600 mb-6">
+                    コストを抑えて、最大限の学びを。<br>
+                    助成金の活用サポートも提携企業を通じてご案内可能です。
+                </p>
+                <!-- CTA (Updated Style) -->
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSey76R4gK829sYtxPBTs0NOX0EU5gp5u-cqteT0MH_bNKVNkw/viewform?usp=dialog"
+                    target="_blank"
+                    class="btn-cta inline-flex items-center justify-center px-12 py-4 text-lg font-bold rounded-full">
+                    資料をもらう
+                </a>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="max-w-3xl mx-auto mb-24 fade-in-section scroll-mt-32">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">よくある質問</h2>
+                <p class="text-gray-500 font-manrope">Q&A</p>
+            </div>
+
+            <div class="space-y-4">
+                <!-- Item 1 -->
+                <div class="glass-card px-6 py-2">
+                    <button
+                        class="accordion-btn w-full py-4 flex justify-between items-center text-left focus:outline-none"
+                        aria-expanded="false">
+                        <span class="font-bold pr-4">ITリテラシーが低くても参加可能ですか？</span>
+                        <i data-lucide="chevron-down" class="accordion-icon w-5 h-5 text-gray-400"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="pb-6 pt-2 text-gray-600 text-sm leading-relaxed border-t border-gray-100 mt-2">
+                            初心者向け前提で設計しています。基本的なPC操作ができれば問題ありません。専門用語も噛み砕いて解説いたします。
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="glass-card px-6 py-2">
+                    <button
+                        class="accordion-btn w-full py-4 flex justify-between items-center text-left focus:outline-none"
+                        aria-expanded="false">
+                        <span class="font-bold pr-4">助成金のサポートをしてもらうことは可能ですか？</span>
+                        <i data-lucide="chevron-down" class="accordion-icon w-5 h-5 text-gray-400"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="pb-6 pt-2 text-gray-600 text-sm leading-relaxed border-t border-gray-100 mt-2">
+                            可能です。提携先の会社をご紹介いたしますので、申請の手続き等もスムーズに行っていただけます。
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="glass-card px-6 py-2">
+                    <button
+                        class="accordion-btn w-full py-4 flex justify-between items-center text-left focus:outline-none"
+                        aria-expanded="false">
+                        <span class="font-bold pr-4">カスタマイズは可能ですか？</span>
+                        <i data-lucide="chevron-down" class="accordion-icon w-5 h-5 text-gray-400"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="pb-6 pt-2 text-gray-600 text-sm leading-relaxed border-t border-gray-100 mt-2">
+                            お客様の業界や職種に合わせたカスタマイズが可能です。詳細はお問い合わせください。（一部費用をいただく可能性はございます）
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA -->
+        <div class="text-center mb-16 fade-in-section scroll-mt-32" id="contact">
+            <!-- CTA (Updated Style) -->
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSey76R4gK829sYtxPBTs0NOX0EU5gp5u-cqteT0MH_bNKVNkw/viewform?usp=dialog"
+                target="_blank"
+                class="btn-cta inline-flex items-center justify-center px-16 py-5 text-xl font-bold rounded-full hover:scale-105">
+                資料をもらう
+            </a>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/50 bg-white/30 backdrop-blur-sm py-12">
+        <div
+            class="max-w-[95%] mx-auto px-4 md:px-8 flex flex-col md:flex-row justify-between items-center md:items-start gap-8">
+            <div class="text-center md:text-left">
+                <h4 class="font-bold text-lg mb-2">株式会社JIL</h4>
+                <p class="text-sm text-gray-600 leading-relaxed">
+                    〒150-0001<br>
+                    東京都渋谷区神宮前6-23-4 桑野ビル2F<br>
+                    Email: info@llabo.jilinc.co.jp
+                </p>
+            </div>
+
+            <div class="flex flex-col md:flex-row gap-8 md:gap-12 items-center">
+                <div class="flex gap-6 text-sm font-medium text-gray-600">
+                    <a href="#features" class="hover:text-blue-600 transition-colors">特徴</a>
+                    <a href="#plans" class="hover:text-blue-600 transition-colors">プラン</a>
+                    <a href="#faq" class="hover:text-blue-600 transition-colors">よくある質問</a>
+                </div>
+                <!-- CTA (Updated Style) -->
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSey76R4gK829sYtxPBTs0NOX0EU5gp5u-cqteT0MH_bNKVNkw/viewform?usp=dialog"
+                    target="_blank"
+                    class="btn-cta inline-flex items-center justify-center px-8 py-3 text-base font-bold rounded-full">
+                    資料をもらう
+                </a>
+            </div>
+        </div>
+        <div class="max-w-[95%] mx-auto px-4 md:px-8 mt-12 pt-8 border-t border-gray-200/50 text-center md:text-left">
+            <p class="text-xs text-gray-400 font-manrope">&copy; 2025 JIL Inc. All Rights Reserved.</p>
+        </div>
     </footer>
 
+    <!-- Scripts -->
     <script>
-        // Header Scroll Effect
-        const header = document.getElementById('header');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
+        // Initialize Lucide Icons
+        lucide.createIcons();
 
-        // Intersection Observer for Fade-in Animation
+        // Scroll Animation Observer
         const observerOptions = {
             root: null,
             rootMargin: '0px',
@@ -598,15 +679,93 @@
         const observer = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                    observer.unobserve(entry.target); // Run only once
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
                 }
             });
         }, observerOptions);
 
-        document.querySelectorAll('.reveal').forEach(el => {
-            observer.observe(el);
+        document.querySelectorAll('.fade-in-section').forEach(section => {
+            observer.observe(section);
         });
+
+        // Header Animation Logic (Refined)
+        window.addEventListener('scroll', () => {
+            const headerCard = document.getElementById('header-card');
+            if (window.scrollY > 50) {
+                headerCard.classList.remove('py-4');
+                headerCard.classList.add('py-2');
+            } else {
+                headerCard.classList.remove('py-2');
+                headerCard.classList.add('py-4');
+            }
+        });
+
+        // Accordion Logic
+        document.querySelectorAll('.accordion-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const content = button.nextElementSibling;
+                const isExpanded = button.getAttribute('aria-expanded') === 'true';
+
+                document.querySelectorAll('.accordion-btn').forEach(otherBtn => {
+                    if (otherBtn !== button) {
+                        otherBtn.setAttribute('aria-expanded', 'false');
+                        otherBtn.nextElementSibling.classList.remove('open');
+                    }
+                });
+
+                button.setAttribute('aria-expanded', !isExpanded);
+                content.classList.toggle('open');
+            });
+        });
+
+        // Mouse tracking for blobs (Parallax)
+        document.addEventListener('mousemove', (e) => {
+            const blobs = document.querySelectorAll('.blob');
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+
+            blobs.forEach((blob, index) => {
+                const speed = (index + 1) * 20;
+                const xOffset = (x - 0.5) * speed;
+                const yOffset = (y - 0.5) * speed;
+            });
+        });
+
+        // Mobile Menu Logic
+        const menuBtn = document.getElementById('menu-btn');
+        const menuIcon = document.getElementById('menu-icon');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+        let isMenuOpen = false;
+
+        menuBtn.addEventListener('click', () => {
+            isMenuOpen = !isMenuOpen;
+            if (isMenuOpen) {
+                mobileMenu.classList.remove('hidden-menu');
+                mobileMenu.classList.add('visible-menu');
+                // Change Icon to Close (X)
+                menuIcon.setAttribute('data-lucide', 'x');
+            } else {
+                mobileMenu.classList.remove('visible-menu');
+                mobileMenu.classList.add('hidden-menu');
+                // Change Icon back to Menu
+                menuIcon.setAttribute('data-lucide', 'menu');
+            }
+            lucide.createIcons(); // Re-render icon
+        });
+
+        // Close menu when link clicked
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                isMenuOpen = false;
+                mobileMenu.classList.remove('visible-menu');
+                mobileMenu.classList.add('hidden-menu');
+                menuIcon.setAttribute('data-lucide', 'menu');
+                lucide.createIcons();
+            });
+        });
+
     </script>
 </body>
 
