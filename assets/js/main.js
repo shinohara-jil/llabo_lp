@@ -112,7 +112,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Mobile Menu Logic
     const menuBtn = document.getElementById('menu-btn');
-    const menuIcon = document.getElementById('menu-icon');
     const mobileMenu = document.getElementById('mobile-menu');
     const mobileLinks = document.querySelectorAll('.mobile-link');
     let isMenuOpen = false;
@@ -124,12 +123,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 mobileMenu.classList.remove('hidden-menu');
                 mobileMenu.classList.add('visible-menu');
                 // Change Icon to Close (X)
-                menuIcon.setAttribute('data-lucide', 'x');
+                menuBtn.innerHTML = '<i data-lucide="x" id="menu-icon"></i>';
             } else {
                 mobileMenu.classList.remove('visible-menu');
                 mobileMenu.classList.add('hidden-menu');
                 // Change Icon back to Menu
-                menuIcon.setAttribute('data-lucide', 'menu');
+                menuBtn.innerHTML = '<i data-lucide="menu" id="menu-icon"></i>';
             }
             lucide.createIcons(); // Re-render icon
         });
@@ -141,8 +140,11 @@ document.addEventListener('DOMContentLoaded', () => {
             isMenuOpen = false;
             mobileMenu.classList.remove('visible-menu');
             mobileMenu.classList.add('hidden-menu');
-            menuIcon.setAttribute('data-lucide', 'menu');
-            lucide.createIcons();
+            // Change Icon back to Menu
+            if (menuBtn) {
+                menuBtn.innerHTML = '<i data-lucide="menu" id="menu-icon"></i>';
+                lucide.createIcons();
+            }
         });
     });
 });
