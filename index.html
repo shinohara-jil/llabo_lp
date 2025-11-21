@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI研修 - Organic Intelligence & Trust</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* --- Variables & Reset --- */
+        :root {
+            --bg-color: #fcfbf9;
+            --text-main: #1a1a1a;
+            --text-sub: #666666;
+            --accent-pink: #ff9a9e;
+            --accent-peach: #fad0c4;
+            --accent-lavender: #a18cd1;
+            --glass-bg: rgba(255, 255, 255, 0.65);
+            --glass-border: rgba(255, 255, 255, 0.4);
+            --font-jp: 'Zen Kaku Gothic New', sans-serif;
+            --font-en: 'Manrope', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-jp);
+            color: var(--text-main);
+            background-color: var(--bg-color);
+            line-height: 1.8;
+            overflow-x: hidden;
+            font-weight: 400;
+        }
+
+        /* --- Typography Utilities --- */
+        h1,
+        h2,
+        h3 {
+            font-feature-settings: "palt";
+            letter-spacing: 0.05em;
+        }
+
+        .en-font {
+            font-family: var(--font-en);
+        }
+
+        /* --- Background Blobs Animation --- */
+        .background-blobs {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.6;
+            animation: float 20s infinite ease-in-out alternate;
+        }
+
+        .blob-1 {
+            top: -10%;
+            left: -10%;
+            width: 60vw;
+            height: 60vw;
+            background: var(--accent-peach);
+            animation-delay: 0s;
+        }
+
+        .blob-2 {
+            bottom: -10%;
+            right: -10%;
+            width: 50vw;
+            height: 50vw;
+            background: var(--accent-lavender);
+            animation-delay: -5s;
+        }
+
+        .blob-3 {
+            top: 40%;
+            left: 40%;
+            width: 40vw;
+            height: 40vw;
+            background: var(--accent-pink);
+            animation-delay: -10s;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            50% {
+                transform: translate(30px, 50px) scale(1.1);
+            }
+
+            100% {
+                transform: translate(-20px, -30px) scale(0.9);
+            }
+        }
+
+        /* --- Common Components --- */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.03);
+            border-radius: 24px;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.06);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px 32px;
+            background: var(--text-main);
+            color: #fff;
+            font-weight: 700;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:hover {
+            background: #333;
+            transform: scale(1.02);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        .section-title {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            text-align: center;
+            margin-bottom: 60px;
+            font-weight: 700;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* --- Header --- */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 0;
+            z-index: 100;
+            transition: background 0.3s;
+        }
+
+        /* Sticky background effect */
+        header.scrolled .header-inner {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 32px;
+            border-radius: 100px;
+            transition: all 0.3s ease;
+            /* 初期状態は背景なし、スクロールでカード化 */
+        }
+
+        .logo {
+            font-family: var(--font-en);
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: var(--text-main);
+            text-decoration: none;
+            position: relative;
+        }
+
+        .logo span {
+            color: var(--accent-pink);
+        }
+
+        .nav-links {
+            display: none;
+            /* Mobile hidden */
+        }
+
+        @media (min-width: 768px) {
+            .nav-links {
+                display: flex;
+                gap: 40px;
+                font-weight: 500;
+                color: var(--text-main);
+            }
+
+            .nav-item {
+                text-decoration: none;
+                color: var(--text-main);
+                position: relative;
+            }
+
+            .nav-item::after {
+                content: '';
+                position: absolute;
+                bottom: -4px;
+                left: 0;
+                width: 0;
+                height: 2px;
+                background: var(--text-main);
+                transition: width 0.3s;
+            }
+
+            .nav-item:hover::after {
+                width: 100%;
+            }
+        }
+
+        .cta-btn {
+            font-size: 0.9rem;
+            padding: 12px 24px;
+            background: transparent;
+            border: 1px solid var(--text-main);
+            color: var(--text-main);
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s;
+        }
+
+        .cta-btn:hover {
+            background: var(--text-main);
+            color: #fff;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            padding: 180px 0 100px;
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        @media (min-width: 900px) {
+            .hero-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .hero-text h1 {
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            font-weight: 700;
+            line-height: 1.4;
+            margin-bottom: 24px;
+        }
+
+        .hero-sub {
+            font-size: 1.1rem;
+            color: var(--text-sub);
+            font-weight: 500;
+            margin-bottom: 40px;
+            display: block;
+            letter-spacing: 0.1em;
+        }
+
+        .hero-image {
+            position: relative;
+        }
+
+        .hero-image img {
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+        }
+
+        /* --- Problems Section --- */
+        .problems {
+            padding: 120px 0;
+        }
+
+        .problems-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 32px;
+        }
+
+        .problem-card {
+            padding: 60px 30px;
+            text-align: center;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .problem-card p {
+            font-size: 1.2rem;
+            font-weight: 700;
+            line-height: 1.6;
+        }
+
+        .problem-card p span {
+            font-family: var(--font-en);
+            font-weight: 800;
+            font-size: 1.4rem;
+        }
+
+        /* --- Features Section --- */
+        .features {
+            padding: 120px 0;
+        }
+
+        .feature-row {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 60px;
+            margin-bottom: 120px;
+            align-items: center;
+        }
+
+        @media (min-width: 900px) {
+            .feature-row {
+                grid-template-columns: 1fr 1fr;
+                gap: 80px;
+            }
+
+            /* Zig-zag layout */
+            .feature-row:nth-child(even) .feature-text {
+                order: 2;
+            }
+
+            .feature-row:nth-child(even) .feature-image {
+                order: 1;
+            }
+        }
+
+        .feature-num {
+            font-family: var(--font-en);
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--glass-border);
+            /* Subtle transparent effect */
+            -webkit-text-stroke: 1px var(--text-main);
+            line-height: 1;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .feature-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 24px;
+            font-weight: 700;
+        }
+
+        .feature-desc {
+            color: var(--text-sub);
+            font-size: 1rem;
+        }
+
+        .feature-image img {
+            border-radius: 24px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        /* --- Plans Section --- */
+        .plans {
+            padding: 120px 0 180px;
+        }
+
+        .plans-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 32px;
+        }
+
+        .plan-card {
+            padding: 50px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .plan-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .plan-price {
+            font-family: var(--font-en);
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--text-main);
+        }
+
+        .plan-unit {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-sub);
+        }
+
+        /* --- Scroll Animation --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Footer - Simple */
+        footer {
+            text-align: center;
+            padding: 40px;
+            font-size: 0.8rem;
+            color: var(--text-sub);
+            background: rgba(255, 255, 255, 0.3);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <header id="header">
+        <div class="container">
+            <div class="header-inner glass-card" style="border-radius: 100px; padding: 12px 32px;">
+                <a href="#" class="logo">rogo<span>.</span></a>
+                <nav class="nav-links">
+                    <a href="#" class="nav-item">サービスの特徴</a>
+                    <a href="#" class="nav-item">研修プラン</a>
+                    <a href="#" class="nav-item">導入事例</a>
+                </nav>
+                <a href="#" class="cta-btn">資料請求</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text reveal">
+                    <span class="hero-sub">~ AIコンサルタント伴走 ~</span>
+                    <h1>現場の生産性を<br>劇的に高める生成AI研修</h1>
+                    <p style="color: var(--text-sub); margin-bottom: 32px;">
+                        ただの学習ではありません。<br>実務に直結するスキルを、プロフェッショナルの伴走と共に。
+                    </p>
+                    <a href="#" class="btn">お問い合わせ・相談</a>
+                </div>
+                <div class="hero-image reveal" style="transition-delay: 0.2s;">
+                    <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=800&q=80"
+                        alt="チームで学習している様子">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="problems">
+        <div class="container">
+            <h2 class="section-title reveal">こんな課題ありませんか？</h2>
+            <div class="problems-grid">
+                <div class="glass-card problem-card reveal" style="transition-delay: 0.1s;">
+                    <p><span>AI</span>が全然<br>分からない</p>
+                </div>
+                <div class="glass-card problem-card reveal" style="transition-delay: 0.2s;">
+                    <p>業務でもっと<br>活かしたい</p>
+                </div>
+                <div class="glass-card problem-card reveal" style="transition-delay: 0.3s;">
+                    <p>言語生成以外<br>も使いたい</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title reveal">本研修の特徴</h2>
+
+            <div class="feature-row">
+                <div class="feature-text reveal">
+                    <span class="feature-num">01</span>
+                    <h3>コンサルタントが伴走</h3>
+                    <p class="feature-desc">
+                        単なる動画視聴や講義形式の一方的な学習ではなく、経験豊富なAIコンサルタントが現場に伴走。貴社の課題に合わせてカリキュラムを調整し、実務での活用定着までを徹底的にサポートします。分からない点はその場ですぐに解決可能です。
+                    </p>
+                </div>
+                <div class="feature-image reveal" style="transition-delay: 0.2s;">
+                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80"
+                        alt="コンサルタントとのミーティング">
+                </div>
+            </div>
+
+            <div class="feature-row">
+                <div class="feature-text reveal">
+                    <span class="feature-num">02</span>
+                    <h3>生成AIのプロが提供</h3>
+                    <p class="feature-desc">
+                        最新の技術トレンドを常にキャッチアップしている生成AIの専門家集団が監修。ChatGPTだけでなく、画像生成やデータ分析など、ビジネスシーンで即戦力となる最先端のノウハウを、初心者にも分かりやすく噛み砕いて提供します。
+                    </p>
+                </div>
+                <div class="feature-image reveal" style="transition-delay: 0.2s;">
+                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80"
+                        alt="プロフェッショナルなチーム">
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="plans">
+        <div class="container">
+            <h2 class="section-title reveal">3つのプラン</h2>
+            <div class="plans-grid">
+                <div class="glass-card plan-card reveal" style="transition-delay: 0.1s;">
+                    <span class="plan-name">集合型</span>
+                    <div class="plan-price">300,000<span class="plan-unit"> / 1回</span></div>
+                </div>
+                <div class="glass-card plan-card reveal" style="transition-delay: 0.2s;">
+                    <span class="plan-name">伴走型</span>
+                    <div class="plan-price">200,000<span class="plan-unit"> / 1人</span></div>
+                </div>
+                <div class="glass-card plan-card reveal" style="transition-delay: 0.3s;">
+                    <span class="plan-name">動画のみ</span>
+                    <div class="plan-price">100,000<span class="plan-unit"> / 1人</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 rogo Inc. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Header Scroll Effect
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Intersection Observer for Fade-in Animation
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target); // Run only once
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+
+</html>
