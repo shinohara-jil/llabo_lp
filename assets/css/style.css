@@ -1,0 +1,220 @@
+@charset "UTF-8";
+
+:root {
+    --bg-color: #f8fbff;
+    --text-main: #1a1a1a;
+    --text-sub: #666666;
+    --accent-blob-1: #a7dbff;
+    --accent-blob-2: #cbf3f0;
+    --accent-blob-3: #d4e0ff;
+    --card-bg: rgba(255, 255, 255, 0.7);
+}
+
+body {
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+.en-font {
+    font-family: 'Manrope', 'Zen Kaku Gothic New', sans-serif;
+}
+
+/* 3.1 Background Blobs */
+.blob-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.6;
+    animation: float 25s infinite ease-in-out alternate;
+}
+
+.blob-1 {
+    top: -10%;
+    left: -10%;
+    width: 50vw;
+    height: 50vw;
+    background: var(--accent-blob-1);
+    animation-delay: 0s;
+}
+
+.blob-2 {
+    bottom: -10%;
+    right: -10%;
+    width: 60vw;
+    height: 60vw;
+    background: var(--accent-blob-3);
+    animation-delay: -5s;
+}
+
+.blob-3 {
+    top: 40%;
+    left: 40%;
+    width: 40vw;
+    height: 40vw;
+    background: var(--accent-blob-2);
+    animation-delay: -10s;
+}
+
+@keyframes float {
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    33% {
+        transform: translate(30px, -50px) scale(1.1);
+    }
+
+    66% {
+        transform: translate(-20px, 20px) scale(0.9);
+    }
+
+    100% {
+        transform: translate(0, 0) scale(1);
+    }
+}
+
+/* 3.2 Glassmorphism Card */
+.glass-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    border-radius: 30px;
+    box-shadow: 0 10px 30px rgba(167, 219, 255, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* 4.1 Scroll Interaction: Fade In Up */
+.fade-in-section {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1.0s cubic-bezier(0.16, 1, 0.3, 1), transform 1.0s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fade-in-section.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Custom Utilities */
+.text-gradient {
+    background: linear-gradient(135deg, #1a1a1a 0%, #4a5568 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Stronger gradient for specific emphasis */
+.text-gradient-accent {
+    background: linear-gradient(135deg, #2563eb 0%, #9333ea 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.nav-link {
+    position: relative;
+    color: var(--text-main);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background-color: var(--accent-blob-1);
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+/* CTA Button Style (New) */
+.btn-cta {
+    background: linear-gradient(135deg, #2563eb 0%, #4f46e5 100%);
+    /* Blue-600 to Indigo-600 */
+    color: white;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+    /* Colored shadow */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.btn-cta:hover {
+    background: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
+    /* Lighter on hover */
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 8px 25px rgba(37, 99, 235, 0.5);
+    /* Stronger glow */
+}
+
+/* Accordion Styles */
+.accordion-content {
+    transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+}
+
+.accordion-content.open {
+    max-height: 500px;
+    /* large enough value */
+    opacity: 1;
+}
+
+.accordion-icon {
+    transition: transform 0.3s ease;
+}
+
+.accordion-btn[aria-expanded="true"] .accordion-icon {
+    transform: rotate(180deg);
+}
+
+/* Plan Specific Styles */
+.plan-price {
+    color: #1a1a1a;
+    letter-spacing: -0.02em;
+}
+
+.plan-item {
+    color: #333;
+    font-weight: 500;
+    list-style: none; /* Ensure no default bullets */
+    padding-left: 0;
+}
+
+/* Mobile Menu Animation */
+#mobile-menu {
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+#mobile-menu.hidden-menu {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+#mobile-menu.visible-menu {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
