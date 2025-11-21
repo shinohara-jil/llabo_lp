@@ -48,15 +48,24 @@
                     <nav class="hidden md:flex items-center gap-8 font-bold text-lg text-gray-600">
                         <a href="#features" class="nav-link">特徴</a>
                         <a href="#plans" class="nav-link">プラン</a>
+                        <a href="#voice" class="nav-link">利用企業の声</a>
                         <a href="#faq" class="nav-link">よくある質問</a>
                     </nav>
 
-                    <!-- CTA (Updated Style) -->
-                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSey76R4gK829sYtxPBTs0NOX0EU5gp5u-cqteT0MH_bNKVNkw/viewform?usp=dialog"
-                        target="_blank"
-                        class="btn-cta hidden md:inline-flex items-center justify-center px-8 py-3 text-base font-bold rounded-full">
-                        資料をもらう
-                    </a>
+                    <div class="hidden md:flex items-center gap-4">
+                        <!-- CTA (Updated Style) -->
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSey76R4gK829sYtxPBTs0NOX0EU5gp5u-cqteT0MH_bNKVNkw/viewform?usp=dialog"
+                            target="_blank"
+                            class="btn-cta inline-flex items-center justify-center px-6 py-3 text-sm font-bold rounded-full">
+                            資料をもらう
+                        </a>
+                        <!-- Secondary CTA -->
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLScHciTBdgxFql4GEKXICiQIJuxQ181TA2zo7Z2IRqMXUFeFYA/viewform"
+                            target="_blank"
+                            class="inline-flex items-center justify-center px-6 py-3 text-sm font-bold rounded-full bg-white text-blue-600 border-2 border-blue-600 hover:bg-blue-50 transition-all shadow-lg hover:shadow-xl">
+                            無料で相談する
+                        </a>
+                    </div>
 
                     <!-- Mobile Menu Button -->
                     <button id="menu-btn" class="md:hidden p-2 text-gray-700 z-50 relative">
@@ -72,6 +81,7 @@
         class="hidden-menu fixed inset-0 z-40 bg-white/95 backdrop-blur-md flex flex-col items-center justify-center space-y-8">
         <a href="#features" class="mobile-link text-2xl font-bold text-gray-800">特徴</a>
         <a href="#plans" class="mobile-link text-2xl font-bold text-gray-800">プラン</a>
+        <a href="#voice" class="mobile-link text-2xl font-bold text-gray-800">利用企業の声</a>
         <a href="#faq" class="mobile-link text-2xl font-bold text-gray-800">よくある質問</a>
         <!-- CTA (Updated Style) -->
         <a href="https://docs.google.com/forms/d/e/1FAIpQLSey76R4gK829sYtxPBTs0NOX0EU5gp5u-cqteT0MH_bNKVNkw/viewform?usp=dialog"
@@ -346,20 +356,28 @@
                     コストを抑えて、最大限の学びを。<br>
                     助成金の活用サポートも提携企業を通じてご案内可能です。
                 </p>
-                <!-- CTA (Updated Style) -->
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLSey76R4gK829sYtxPBTs0NOX0EU5gp5u-cqteT0MH_bNKVNkw/viewform?usp=dialog"
-                    target="_blank"
-                    class="btn-cta inline-flex items-center justify-center px-12 py-4 text-lg font-bold rounded-full">
-                    資料をもらう
-                </a>
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <!-- CTA (Updated Style) -->
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSey76R4gK829sYtxPBTs0NOX0EU5gp5u-cqteT0MH_bNKVNkw/viewform?usp=dialog"
+                        target="_blank"
+                        class="btn-cta inline-flex items-center justify-center px-12 py-4 text-lg font-bold rounded-full">
+                        資料をもらう
+                    </a>
+                    <!-- Secondary CTA -->
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLScHciTBdgxFql4GEKXICiQIJuxQ181TA2zo7Z2IRqMXUFeFYA/viewform"
+                        target="_blank"
+                        class="inline-flex items-center justify-center px-12 py-4 text-lg font-bold rounded-full bg-white text-blue-600 border-2 border-blue-600 hover:bg-blue-50 transition-all shadow-lg hover:shadow-xl">
+                        無料で相談する
+                    </a>
+                </div>
             </div>
         </section>
 
         <!-- Voice of User Section -->
-        <section class="max-w-6xl mx-auto mb-32 fade-in-section">
+        <section id="voice" class="max-w-6xl mx-auto mb-32 fade-in-section scroll-mt-32">
             <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">成果事例</h2>
-                <div class="w-12 h-1 bg-blue-300 mx-auto rounded-full"></div>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">利用企業の声</h2>
+                <p class="text-gray-500 font-manrope">VOICE</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -471,6 +489,7 @@
                 <div class="flex gap-6 text-sm font-medium text-gray-600">
                     <a href="#features" class="hover:text-blue-600 transition-colors">特徴</a>
                     <a href="#plans" class="hover:text-blue-600 transition-colors">プラン</a>
+                    <a href="#voice" class="hover:text-blue-600 transition-colors">利用企業の声</a>
                     <a href="#faq" class="hover:text-blue-600 transition-colors">よくある質問</a>
                 </div>
                 <!-- CTA (Updated Style) -->
